@@ -2,7 +2,7 @@
   <label class="veui-checkbox" :ui="ui">
     <input ref="box" type="checkbox" v-bind="attrs" @change="handleChange($event.target.checked)">
     <span class="veui-checkbox-box">
-      <icon v-if="checked || localIndeterminate" :name="localIndeterminate ? 'minus' : 'check'"></icon>
+      <icon v-if="checked || localIndeterminate" :name="`${localIndeterminate ? 'minus' : 'check'}-thick`"></icon>
     </span>
     <span><slot></slot></span>
   </label>
@@ -10,11 +10,10 @@
 
 <script>
 import Icon from './Icon'
+import '../icons'
 import { input } from '../mixins'
 import { assign } from 'lodash'
 import { patchIndeterminate } from '../utils/dom'
-import 'vue-awesome/icons/check'
-import 'vue-awesome/icons/minus'
 
 export default {
   name: 'veui-checkbox',
@@ -109,7 +108,7 @@ export default {
   & :indeterminate + &-box {
     background-color: @veui-theme-color-primary;
     border-color: @veui-theme-color-primary;
-    .veui-icon {
+    & > .veui-icon {
       display: inline-block;
       position: absolute;
       color: #fff;
